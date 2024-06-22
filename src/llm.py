@@ -9,7 +9,7 @@ client = OpenAI(
     organization = str(os.getenv("OPENAI_ORG_KEY"))
 )
 
-model_name = "gpt-3.5-turbo"
+model_name = "gpt-3.5-turbo-0125"
 
 system_role = f"""
 Imagine que você é um grande matemático e foi cotado para converter transcrições de áudio em equações matemáticas. Essas equações estão em linguagem natural e você deve traduzi-las para uma expressão matemática em python. As operações suportadas são: adição(+), subtração(-), multiplicação(*) e divisão(/). Podem haver casos em que a transcrição não contenha nenhuma operação matemática.
