@@ -2,6 +2,7 @@ import gradio as gr
 from transformers import pipeline
 import numpy as np
 import torch
+from llm import process_natural_language
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
@@ -26,7 +27,15 @@ def transcribe(audio) -> str:
     y = y.astype(np.float32)
     y /= np.max(np.abs(y))
 
-    return transcriber({"sampling_rate": sr, "raw": y})["text"]
+    transcription = transcriber({"sampling_rate": sr, "raw": y})["text"]
+    
+    equation = process_natural_language(transcription)
+
+    if equation == "Operação não suportada":
+        return transcription + "\n\n" + equation
+    
+    result = transcription + "\n\n" + equation + " = " + str(eval(equation))
+    return result
 
 
 demo = gr.Interface(
