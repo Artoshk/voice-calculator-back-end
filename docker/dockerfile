@@ -1,5 +1,3 @@
-# To run use the:
-# docker build -t voice-calculator-back-end -f docker/dockerfile .
 # Use the official Python image from the Docker Hub
 FROM python:3.11-slim
 
@@ -9,20 +7,17 @@ WORKDIR /app
 # Copy the requirements file if you have one
 COPY requirements.txt .
 
-# Install the dependencies
+# Run system dependencies
+RUN apt-get update && apt-get install -y libsndfile1 libsndfile1-dev
+
+# Install the Python dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-# docker run -p 7860:7860 voice-calculator-back-end
-# Expose the port the app runs on gradio
-# EXPOSE 7860
-# ENV GRADIO_SERVER_NAME="0.0.0.0"
-
-# docker run -p 8000:8000 voice-calculator-back-end
-# Expose the port the app runs on fastapi
+# Expose the port the app runs on Flask
 EXPOSE 8000
 
 # Copy the rest of the application code to the container
 COPY . .
 
-# Run the tests using pytest
-CMD ["python", "src/service.py"]
+# Run the Flask application
+CMD ["uvicorn", "src.main:app", "--host", "0.0.0.0", "--port", "8000"]

@@ -4,7 +4,7 @@ import torch
 from transformers import pipeline
 import torchaudio
 import io
-from llm import process_natural_language
+from .llm import process_natural_language
 
 app = FastAPI()
 
@@ -56,7 +56,3 @@ async def process_audio(audio: bytes = File(...)):
 @app.post("/process_equation")
 def process_equation(equation: str):
     return {"result": equation + " = " + str(eval(equation))}
-
-if __name__ == "__main__":
-    import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8000)

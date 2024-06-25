@@ -1,0 +1,10 @@
+version: '3.8'
+
+services:
+  voice-calculator-back-end:
+    image: voice-calculator-back-end
+    ports:
+      - "8000:8000"
+    environment:
+      - OPENAI_KEY=${OPENAI_KEY}
+      - OPENAI_ORG_KEY=${OPENAI_ORG_KEY}
