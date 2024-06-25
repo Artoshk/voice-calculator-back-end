@@ -4,11 +4,13 @@ import os
 
 load_dotenv()
 
-client = OpenAI(
-    api_key = str(os.getenv("OPENAI_KEY")),
-    organization = str(os.getenv("OPENAI_ORG_KEY"))
-)
+if not os.getenv("OPENAI_KEY") or not os.getenv("OPENAI_ORG_KEY"):
+    raise EnvironmentError("Required environment variables OPENAI_KEY or OPENAI_ORG_KEY are missing")
 
+client = OpenAI(
+    api_key=str(os.getenv("OPENAI_KEY")),
+    organization=str(os.getenv("OPENAI_ORG_KEY"))
+)
 model_name = "gpt-3.5-turbo-0125"
 
 system_role = f"""
