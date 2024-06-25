@@ -1,4 +1,4 @@
-name: python build, test and deploy
+name: Python Build, Test and Deploy
 
 on:
   push:
@@ -10,7 +10,7 @@ on:
 
 jobs:
   build_and_test:
-
+    name: Build and Test Back-End
     runs-on: ubuntu-latest
 
     steps:
