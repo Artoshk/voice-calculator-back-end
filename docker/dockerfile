@@ -1,6 +1,5 @@
 # To run use the:
 # docker build -t voice-calculator-back-end -f docker/dockerfile .
-# docker run -p 7860:7860 voice-calculator-back-end
 # Use the official Python image from the Docker Hub
 FROM python:3.11-slim
 
@@ -13,12 +12,17 @@ COPY requirements.txt .
 # Install the dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Expose the port the app runs on
-EXPOSE 7860
-ENV GRADIO_SERVER_NAME="0.0.0.0"
+# docker run -p 7860:7860 voice-calculator-back-end
+# Expose the port the app runs on gradio
+# EXPOSE 7860
+# ENV GRADIO_SERVER_NAME="0.0.0.0"
+
+# docker run -p 8000:8000 voice-calculator-back-end
+# Expose the port the app runs on fastapi
+EXPOSE 8000
 
 # Copy the rest of the application code to the container
 COPY . .
 
 # Run the tests using pytest
-CMD ["python", "src/main_example.py"]
+CMD ["python", "src/service.py"]
