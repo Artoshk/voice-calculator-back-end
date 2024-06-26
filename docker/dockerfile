@@ -19,5 +19,8 @@ EXPOSE 8000
 # Copy the rest of the application code to the container
 COPY . .
 
+# Go to src folder
+WORKDIR /app/src
+
 # Run the Flask application
-CMD ["uvicorn", "src.main:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
