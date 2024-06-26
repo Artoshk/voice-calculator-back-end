@@ -69,7 +69,7 @@ jobs:
 
           See changes: https://github.com/${{ github.repository }}/commit/${{github.sha}}
         # comma-separated string, send email to
-        to: pedro.henrique@hmit.com.br
+        to: pedrooliveira0997@gmail.com
         # from email name
         from: GitHub Actions Notifications
 
@@ -160,7 +160,7 @@ jobs:
 
             Docker Image: ${{ steps.meta.outputs.tags }}-${{ steps.short-sha.outputs.sha }}
           # comma-separated string, send email to
-          to: pedro.henrique@hmit.com.br
+          to: pedrooliveira0997@gmail.com
           # from email name
           from: GitHub Actions Notifications
 
