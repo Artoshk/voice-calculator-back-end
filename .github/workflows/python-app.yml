@@ -43,6 +43,7 @@ jobs:
 
     - name: Send Mail
       uses: dawidd6/action-send-mail@v2
+      if: always()
       with:
         # mail server settings
         server_address: smtp.gmail.com
@@ -68,12 +69,13 @@ jobs:
 
           See changes: https://github.com/${{ github.repository }}/commit/${{github.sha}}
         # comma-separated string, send email to
-        to: pedro.henrique@hmit.com.br
+        to: pedrooliveira0997@gmail.com
         # from email name
         from: GitHub Actions Notifications
 
     - name: Send Telegram Message
       uses: appleboy/telegram-action@master
+      if: always()
       with:
         to: ${{ secrets.TELEGRAM_TO }}
         token: ${{ secrets.TELEGRAM_TOKEN }}
@@ -134,6 +136,7 @@ jobs:
 
       - name: Send Mail
         uses: dawidd6/action-send-mail@v2
+        if: always()
         with:
           # mail server settings
           server_address: smtp.gmail.com
@@ -157,12 +160,13 @@ jobs:
 
             Docker Image: ${{ steps.meta.outputs.tags }}-${{ steps.short-sha.outputs.sha }}
           # comma-separated string, send email to
-          to: pedro.henrique@hmit.com.br
+          to: pedrooliveira0997@gmail.com
           # from email name
           from: GitHub Actions Notifications
 
       - name: Send Telegram Message
         uses: appleboy/telegram-action@master
+        if: always()
         with:
           to: ${{ secrets.TELEGRAM_TO }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
