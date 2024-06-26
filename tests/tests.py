@@ -15,7 +15,7 @@ def test_process_audio():
     
 def test_process_audio_invalid():
     # Load a sample audio file for testing
-    with open("tests/audio_fail.mp3", "rb") as audio_file:
+    with open("tests/audio_fail.wav", "rb") as audio_file:
         response = client.post("/process_audio", files={"audio": audio_file})
     
     assert response.status_code == 200
