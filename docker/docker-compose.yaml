@@ -8,9 +8,19 @@ services:
     environment:
       - OPENAI_KEY=${OPENAI_KEY}
       - OPENAI_ORG_KEY=${OPENAI_ORG_KEY}
+
   prometheus:
     image: prom/prometheus
     ports:
       - 9090:9090
     volumes:
-      - ./config/prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./configs/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+
+  grafana:
+    image: grafana/grafana:10.4.2
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./configs/grafana:/etc/grafana/provisioning/datasources
+      - ./configs/dashboards.yml:/etc/grafana/provisioning/dashboards/dashboards.yml
+      - ./configs/dashboards:/etc/grafana/dashboards
