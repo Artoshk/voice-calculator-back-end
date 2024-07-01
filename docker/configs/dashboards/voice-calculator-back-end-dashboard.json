@@ -24,7 +24,6 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 3,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -629,6 +628,47 @@
       "yaxis": {
         "align": false
       }
+    },
+    {
+      "datasource": {
+        "type": "loki",
+        "uid": "P8E80F9AEF21F6940"
+      },
+      "gridPos": {
+        "h": 12,
+        "w": 11,
+        "x": 0,
+        "y": 19
+      },
+      "id": 21,
+      "maxDataPoints": "",
+      "options": {
+        "dedupStrategy": "none",
+        "enableLogDetails": true,
+        "prettifyLogMessage": false,
+        "showCommonLabels": false,
+        "showLabels": false,
+        "showTime": true,
+        "sortOrder": "Descending",
+        "wrapLogMessage": false
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "P8E80F9AEF21F6940"
+          },
+          "editorMode": "code",
+          "expr": "{container_name=\"docker-voice-calculator-back-end-1\"} |= ``| logfmt",
+          "hide": false,
+          "legendFormat": "",
+          "queryType": "range",
+          "refId": "A"
+        }
+      ],
+      "title": "Log",
+      "transparent": true,
+      "type": "logs"
     }
   ],
   "refresh": "5s",
@@ -697,6 +737,6 @@
   "timezone": "",
   "title": "Voice Calculator Observability",
   "uid": "adq5geb3o08owc",
-  "version": 17,
+  "version": 1,
   "weekStart": ""
 }
