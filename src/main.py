@@ -5,6 +5,7 @@ from transformers import pipeline
 import torchaudio
 import io
 from llm import process_natural_language
+from prometheus_fastapi_instrumentator import Instrumentator
 
 app = FastAPI()
 
@@ -20,6 +21,8 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+Instrumentator().instrument(app).expose(app)
 
 LANGUAGE = "portuguese"
 BATCH_SIZE = 1 # Sequential reading for now
