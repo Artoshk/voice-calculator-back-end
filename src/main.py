@@ -5,6 +5,7 @@ from transformers import pipeline
 import torchaudio
 import io
 from llm import process_natural_language
+from prometheus_fastapi_instrumentator import Instrumentator
 
 app = FastAPI()
 
@@ -21,6 +22,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+Instrumentator().instrument(app).expose(app)
+
 LANGUAGE = "portuguese"
 BATCH_SIZE = 1 # Sequential reading for now
 model_name_or_path = "openai/whisper-small"
@@ -30,11 +33,11 @@ device = "cuda" if torch.cuda.is_available() else "cpu"
 model = pipeline(
     "automatic-speech-recognition",
     model=model_name_or_path,
-        generate_kwargs={"language": LANGUAGE},
-        device=0 if device == "cuda" else -1,
-        batch_size=BATCH_SIZE,
-        chunk_length_s=30,
-        framework="pt"
+    generate_kwargs={"language": LANGUAGE},
+    device=device,
+    batch_size=BATCH_SIZE,
+    chunk_length_s=30,
+    framework="pt"
     )
 print(f"Model loaded on {device}")
 
