@@ -21,7 +21,7 @@ Is necessary to add the credentials to `OpenAI` in the `.env` file inside the `s
 
 To run the project, you need to install the dependencies using the command `pip install -r requirements.txt`, cd into the `src` folder and run the command `uvicorn main:app --host 0.0.0.0 --port 8000`.
 
-You can also use docker to run the project, using the command `docker build -t voice-calculator-back-end -f docker/dockerfile .` if you want call the docker compose file, use the command `docker-compose -f .\docker\docker-compose.yaml --env-file .env up` to build the image and `docker run -p 8000:8000 voice-calculator-back-end` to run the container.
+You can also use docker to run the project, using the command `docker build -t voice-calculator-back-end -f docker/dockerfile .` if you want call the docker compose file, use the command `docker-compose -f .\docker\docker-compose.yaml --env-file .env up -d` to build the image and `docker run -p 8000:8000 voice-calculator-back-end` to run the container.
 
 ## Tips
 
