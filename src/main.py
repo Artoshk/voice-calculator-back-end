@@ -33,11 +33,11 @@ device = "cuda" if torch.cuda.is_available() else "cpu"
 model = pipeline(
     "automatic-speech-recognition",
     model=model_name_or_path,
-        generate_kwargs={"language": LANGUAGE},
-        device=0 if device == "cuda" else -1,
-        batch_size=BATCH_SIZE,
-        chunk_length_s=30,
-        framework="pt"
+    generate_kwargs={"language": LANGUAGE},
+    device=device,
+    batch_size=BATCH_SIZE,
+    chunk_length_s=30,
+    framework="pt"
     )
 print(f"Model loaded on {device}")
 
