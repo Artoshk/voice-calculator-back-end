@@ -1,6 +1,22 @@
-version: '3.8'
-
 services:
+  loki:
+    image: grafana/loki
+    command: -config.file=/etc/loki/local-config.yml
+    ports:
+      - "3100:3100"
+    volumes:
+      - ./configs/loki/local-config.yml:/etc/loki/local-config.yml
+
+  promtail:
+    image:  grafana/promtail
+    volumes:
+      - ./configs/promtail/config.yml:/etc/promtail/docker-config.yml
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /var/lib/docker/containers:/var/lib/docker/containers
+    command: -config.file=/etc/promtail/docker-config.yml
+    depends_on:
+      - loki
+
   voice-calculator-back-end:
     image: voice-calculator-back-end
     ports:
@@ -8,3 +24,21 @@ services:
     environment:
       - OPENAI_KEY=${OPENAI_KEY}
       - OPENAI_ORG_KEY=${OPENAI_ORG_KEY}
+    labels:
+      logging: "promtail"
+
+  prometheus:
+    image: prom/prometheus
+    ports:
+      - 9090:9090
+    volumes:
+      - ./configs/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+
+  grafana:
+    image: grafana/grafana:10.4.2
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./configs/grafana:/etc/grafana/provisioning/datasources
+      - ./configs/dashboards.yml:/etc/grafana/provisioning/dashboards/dashboards.yml
+      - ./configs/dashboards:/etc/grafana/dashboards
