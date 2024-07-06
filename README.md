@@ -2,7 +2,7 @@
 
 <h2> Project: Final CI/CD Project </h2>
 
-**Team:**
+**Team:** 
 Anderson Karl,
 Isaías Fontes,
 Pedro Henrique and
