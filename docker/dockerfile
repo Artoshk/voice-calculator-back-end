@@ -8,7 +8,7 @@ WORKDIR /app
 COPY requirements.txt .
 
 # Run system dependencies
-RUN apt-get update && apt-get install -y libsndfile1 libsndfile1-dev
+RUN apt-get update && apt-get install -y libsndfile1 libsndfile1-dev ffmpeg
 
 # Install the Python dependencies
 RUN pip install --no-cache-dir -r requirements.txt

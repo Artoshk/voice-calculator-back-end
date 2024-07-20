@@ -4,7 +4,7 @@ from main import app  # Import your FastAPI app
 # Initialize TestClient
 client = TestClient(app)
 
-def should_process_audio():
+def test_should_process_audio():
     # Arrange
     with open("tests/audio_pass.wav", "rb") as audio_file:
         # Act
@@ -14,7 +14,7 @@ def should_process_audio():
     result = response.json()
     assert result["result"] == " 25 vezes 35 dividido por 2.\n\n25*35/2 = 437.5"
     
-def should_not_process_invalid_audio():
+def test_should_not_process_invalid_audio():
     # Arrange
     with open("tests/audio_fail.wav", "rb") as audio_file:
         # Act
@@ -24,7 +24,7 @@ def should_not_process_invalid_audio():
     result = response.json()
     assert "Operação não suportada" in result["result"]
     
-def should_not_process_files_that_are_not_audio():
+def test_should_not_process_files_that_are_not_audio():
     # Arrange
     with open("tests/not_audio_file.wav", "rb") as audio_file:
         # Act
@@ -34,7 +34,7 @@ def should_not_process_files_that_are_not_audio():
     result = response.json()
     assert "Operação não suportada" in result['detail']
 
-def should_add_numbers():
+def test_should_add_numbers():
     # Arrange
     form_data = {
         'equation': '2 + 2'
@@ -46,7 +46,7 @@ def should_add_numbers():
     result = response.json()
     assert result["result"] == "2 + 2 = 4"
 
-def should_not_divide_by_zero():
+def test_should_not_divide_by_zero():
     # Arrange
     form_data = {
         'equation': '2 / 0'
@@ -58,7 +58,7 @@ def should_not_divide_by_zero():
     result = response.json()
     assert result["detail"] == "division by zero"
 
-def should_not_process_invalid_equation():
+def test_should_not_process_invalid_equation():
     # Arrange
     form_data = {
         'equation': 'unsupported operation'
